@@ -1,0 +1,81 @@
+[project]
+name = "fastapi-starter"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "bcrypt>=4.3.0",
+    "email-validator>=2.2.0",
+    "fastapi>=0.115.12",
+    "pydantic>=2.11.6",
+    "pyjwt>=2.10.1",
+    "pymysql>=1.1.1",
+    "python-dotenv>=1.1.0",
+    "sqlmodel>=0.0.24",
+    "uvicorn>=0.34.3",
+]
+
+[dependency-groups]
+dev = ["httpx>=0.28.1", "pytest>=8.4.0", "pytest-cov>=6.2.1", "ruff>=0.11.13"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"  # Set to match the closest supported version if you're using Python 3.13
+fix = true
+show-fixes = true
+unsafe-fixes = false
+preview = true  # Enables preview rules (more aggressive linting)
+
+# Enable common rule sets
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "B",    # flake8-bugbear
+    "I",    # isort (import sorting)
+    "UP",   # pyupgrade (modern Python)
+    "N",    # pep8-naming
+    "D",    # pydocstyle
+    "C4",   # flake8-comprehensions
+    "SIM",  # flake8-simplify
+    "PTH",  # flake8-use-pathlib
+    "PERF", # Perflint
+    "PL",   # Pylint rules
+    "RUF",  # Ruff-specific rules
+]
+
+ignore = [
+    "D100",  # Missing docstring in public module
+    "D104",  # Missing docstring in public package
+    "D107",  # Missing docstring in __init__
+]
+
+exclude = [
+    ".venv",
+    "build",
+    "dist",
+    "migrations",
+    "__pycache__",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+
+[tool.ruff.lint.isort]
+known-first-party = ["modules"]  # Replace with your package/module name
+force-single-line = false
+combine-as-imports = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"  # Or "numpy" if preferred
+
+[tool.ruff.lint.pep8-naming]
+classmethod-decorators = ["classmethod", "pydantic.validator"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D101", "D102", "D103", "PLR2004"]
+"__init__.py" = ["F401"]

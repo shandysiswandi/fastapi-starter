@@ -1,0 +1,27 @@
+services:
+  mysql:
+    image: mysql:8.0-debian
+    pull_policy: missing
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: fastapi
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - fastapi_mysql_data:/var/lib/mysql
+    networks:
+      - fastapi-network
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping --silent -uuser -ppassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  fastapi_mysql_data:
+
+networks:
+  fastapi-network:
+    driver: bridge 
