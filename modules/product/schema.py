@@ -8,6 +8,9 @@ class Product(BaseModel):
     price: float
     quantity: int
 
+    class Config:
+        orm_mode = True
+
 
 class CreateProductRequest(BaseModel):
     name: str = Field(min_length=5)

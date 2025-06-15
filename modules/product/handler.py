@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Path
 from sqlmodel import Session
+from typing import Annotated
 
 from modules.database import get_session
 from .service import ProductService
@@ -17,8 +18,11 @@ async def list(service: ProductService = Depends(get_service)):
     return service.get_all()
 
 
-@ProductRouter.get("/<int:id>")
-async def get(id: int, service: ProductService = Depends(get_service)):
+@ProductRouter.get("/{id}")
+async def get(
+    id: Annotated[int, Path()],
+    service: ProductService = Depends(get_service),
+):
     return service.get_by_id(id)
 
 
@@ -30,15 +34,20 @@ async def create(
     return service.create(data)
 
 
-@ProductRouter.put("/<int:id>")
+@ProductRouter.put("/{id}")
 async def update(
-    id: int,
+    id: Annotated[int, Path()],
     data: UpdateProductRequest,
     service: ProductService = Depends(get_service),
 ):
     return service.update(id, data)
 
 
-@ProductRouter.delete("/<int:id>")
-async def delete(id: int, service: ProductService = Depends(get_service)):
-    return service.delete(id)
+@ProductRouter.delete("/{id}")
+async def delete(
+    id: Annotated[int, Path()],
+    service: ProductService = Depends(get_service),
+):
+    ok = service.delete(id)
+
+    return {"success": ok}
