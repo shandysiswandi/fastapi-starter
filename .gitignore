@@ -23,7 +23,6 @@ coverage.xml
 # Pytest
 .pytest_cache/
 
-
 # Environment
 .env
 .env.*
@@ -34,3 +33,6 @@ coverage.xml
 
 # Databases
 database.db
+
+# Text Editor or IDE
+.vscode/settings.json

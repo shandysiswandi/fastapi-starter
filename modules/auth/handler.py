@@ -63,8 +63,7 @@ async def register(
     response_model=APIResponse[ResetPasswordResponse],
     summary="Initiate Password Reset",
     description=(
-        "Send a password reset request (e.g., via email) to "
-        "start the password reset process."
+        "Send a password reset request (e.g., via email) to start the password reset process."
     ),
 )
 async def reset_password(
@@ -81,8 +80,7 @@ async def reset_password(
     response_model=APIResponse[ResetPasswordConfirmResponse],
     summary="Confirm Password Reset",
     description=(
-        "Confirm and complete the password reset using a "
-        "valid reset token and new password."
+        "Confirm and complete the password reset using a valid reset token and new password."
     ),
 )
 async def reset_password_confirm(
